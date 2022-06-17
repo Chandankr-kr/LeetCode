@@ -30,7 +30,6 @@ public:
                 if(front->right)
                     q1.push(front->right);
             }
-            // if(temp!=INT_MIN)
                 res.push_back(temp);
         }
         return res;
