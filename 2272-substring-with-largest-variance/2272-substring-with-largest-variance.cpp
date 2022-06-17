@@ -18,7 +18,7 @@ public:
                         res=max(res,cnt1-cnt2);
                     }
                     else if(cnt2==0 and flag){
-                        res=max(res,cnt1-cnt2-1);
+                        res=max(res,cnt1-1);
                     }
                     
                     if(cnt2>cnt1){
