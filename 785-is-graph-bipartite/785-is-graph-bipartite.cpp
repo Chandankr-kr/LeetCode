@@ -17,11 +17,11 @@ public:
                         q1.push(it);
                     }
                     else if(color[it]==color[front])
-                        return false;
+                        return true;
                 }
             }
         }
-        return true;
+        return false;
     }
     
     bool isBipartite(vector<vector<int>>& graph) {
@@ -30,7 +30,7 @@ public:
         vector<bool> visited(n,false);
         for(int i=0;i<n;i++){
             if(!visited[i]){
-                if(!findSol(graph,i,color,visited))
+                if(findSol(graph,i,color,visited))
                     return false;
             }
         }
