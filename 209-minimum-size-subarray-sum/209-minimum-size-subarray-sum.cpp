@@ -1,14 +1,11 @@
 class Solution {
 public:
     int minSubArrayLen(int target, vector<int>& nums) {
-        int res=INT_MAX;
-        int i=0;
-        int j=0;
-        int sum=0;
-        int n=nums.size();
+        int res=INT_MAX,n=nums.size(),j=0,sum=0,i=0;
         while(i<n){
             sum+=nums[i++];
             while(sum>=target){
+                
                 res=min(res,i-j);
                 sum-=nums[j++];
             }
