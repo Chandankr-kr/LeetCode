@@ -16,7 +16,7 @@ public:
     string findSol(TreeNode* root){
         if(root==NULL)
             return "*";
-        string str="("+to_string(root->val)+findSol(root->left)+findSol(root->right)+")";
+        string str="("+findSol(root->left)+to_string(root->val)+findSol(root->right)+")";
         mp[str].push_back(root);
         // cout<<str<<" ";
         return str;
