@@ -11,25 +11,25 @@
  */
 class Solution {
 public:
-    int res=0;
-    int  findSol(TreeNode* root,long target){
+    unordered_map<int,int> mp;
+    int cnt=0;
+    
+    void findSol(TreeNode* root,int target,long long int sum){
         if(root==NULL)
-            return 0;
-        if(target==root->val){
-            res++;
-            // cout<<target<<" ";
-        }
-        findSol(root->left,target-root->val);
-        findSol(root->right,target-root->val);
-        return res;
+            return;
+        sum+=root->val;
+        if(target==sum)
+            cnt++;
+        if(mp.find(sum-target)!=mp.end())
+            cnt+=mp[sum-target];
+        mp[sum]++;
+        findSol(root->left,target,sum);
+        findSol(root->right,target,sum);
+        mp[sum]--;
     }
     
     int pathSum(TreeNode* root, int targetSum) {
-        if(root==NULL)
-            return 0;
-        findSol(root,targetSum);
-        pathSum(root->left,targetSum);
-        pathSum(root->right,targetSum);
-        return res;
+        findSol(root,targetSum,0);
+        return cnt;
     }
 };
