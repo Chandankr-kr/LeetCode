@@ -10,7 +10,6 @@ public:
             int c=mid%n;
             if(matrix[r][c]==target)
                 return true;
-            
             else if(matrix[r][c]<target)
                 lo=mid+1;
             else
