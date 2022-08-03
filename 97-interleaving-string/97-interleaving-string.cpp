@@ -1,24 +1,25 @@
 class Solution {
 public:
-    
-    bool findSol(string &s1,string &s2,string &s3,int i,int j,int k,vector<vector<int>> &result)
-    {
-        if(k==s3.size())
+    int dp[201][201];
+    bool findSol(string &s1,string &s2,string &s3,int i,int j,int k){
+        if(s3.size()==k)
             return true;
-        if(result[i][j]!=-1)
-            return result[i][j];
+        if(dp[i][j]!=-1)
+            return dp[i][j];
         bool res=false;
-        if(i<s1.size() && s1[i]==s3[k])
-            res=res || findSol(s1,s2,s3,i+1,j,k+1,result);
-        if(j<s2.size() && s2[j]==s3[k])
-            res=res || findSol(s1,s2,s3,i,j+1,k+1,result);
-        return result[i][j]=res;
+        if(i<s1.size() and s1[i]==s3[k]){
+            res=res or findSol(s1,s2,s3,i+1,j,k+1);
+        }
+        if(j<s2.size() and s3[k]==s2[j]){
+            res=res or findSol(s1,s2,s3,i,j+1,k+1);
+        }
+        return dp[i][j]=res;
     }
     
     bool isInterleave(string s1, string s2, string s3) {
         if(s1.size()+s2.size()!=s3.size())
             return false;
-        vector<vector<int>> result(s1.size()+1,vector<int>(s2.size()+1,-1));
-        return findSol(s1,s2,s3,0,0,0,result);
+        memset(dp,-1,sizeof dp);
+        return findSol(s1,s2,s3,0,0,0);
     }
 };
