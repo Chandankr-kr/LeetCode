@@ -16,23 +16,17 @@ public:
                 if(temp<0 or temp>1000 or s1.count(temp))
                     continue;
                 s1.insert(temp);
-                    for(int j=0;j<nums.size();j++){
-                        if(s1.count(temp+nums[j])==0){
-                            q1.push(temp+nums[j]);
-                            // s1.insert(temp+nums[j]);
-                        }
+                for(int j=0;j<nums.size();j++){
+                        q1.push(temp+nums[j]);
                         
-                        if(s1.count(temp-nums[j])==0){
-                            q1.push(temp-nums[j]);
-                            // s1.insert(temp-nums[j]);
-                        }
+                    
+                        q1.push(temp-nums[j]);
                         
-                        if(s1.count(temp^nums[j])==0){
-                            q1.push(temp^nums[j]);
-                            // s1.insert(temp^nums[j]);
-                        }
+                
+                        q1.push(temp^nums[j]);
+                    
                             
-                    }
+                }
             }
         }
         return -1;
