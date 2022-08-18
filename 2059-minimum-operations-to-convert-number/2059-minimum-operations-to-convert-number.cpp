@@ -17,15 +17,9 @@ public:
                     continue;
                 s1.insert(temp);
                 for(int j=0;j<nums.size();j++){
-                        q1.push(temp+nums[j]);
-                        
-                    
-                        q1.push(temp-nums[j]);
-                        
-                
-                        q1.push(temp^nums[j]);
-                    
-                            
+                    q1.push(temp+nums[j]);
+                    q1.push(temp-nums[j]);
+                    q1.push(temp^nums[j]);
                 }
             }
         }
