@@ -11,25 +11,23 @@
  */
 class Solution {
 public:
+    TreeNode* findChild(TreeNode* root){
+        if(root->right==NULL)
+            return root;
+        return findChild(root->right);
+    }
+    
     TreeNode* helper(TreeNode* root){
-       if(root->left==NULL){
-           return root->right;
-       } 
-       else if(root->right==NULL){
-           return root->left;
-       }
-        
-        TreeNode* rightChild=root->right;
-        TreeNode* lastRight=findLastRight(root->left);
-        lastRight->right=rightChild;
+        if(root->left==NULL)
+            return root->right;
+        else if(root->right==NULL)
+            return root->left;
+        TreeNode* rootRight=root->right;
+        TreeNode* leftRightChild=findChild(root->left);
+        leftRightChild->right=rootRight;
         return root->left;
     }
     
-    TreeNode* findLastRight(TreeNode* root){
-        if(root->right==NULL)
-            return root;
-        return findLastRight(root->right);
-    }
     TreeNode* deleteNode(TreeNode* root, int key) {
         if(root==NULL)
             return NULL;
