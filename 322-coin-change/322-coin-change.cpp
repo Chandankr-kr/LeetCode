@@ -1,23 +1,31 @@
 class Solution {
 public:
-    vector<vector<int>> dp;
-    int findSol(vector<int> &nums,int n,int amount)
-    {
-        if(amount==0)
+    int findSol(vector<int> &coins,int ind,int amount,vector<vector<int>>& dp){
+        if(amount==0){
             return 0;
-        if(n==0 || amount<0)
+        }
+        
+        if(amount<0 or ind==coins.size())
             return INT_MAX-1;
-        if(dp[n][amount]!=-1)
-            return dp[n][amount];
-        if(nums[n-1]<=amount)
-            return dp[n][amount]= min(findSol(nums,n-1,amount),1+findSol(nums,n,amount-nums[n-1]));
-        else
-            return dp[n][amount]= findSol(nums,n-1,amount);
+        
+        if(dp[ind][amount]!=-1)
+            return dp[ind][amount];
+        
+        int res=0;
+        if(amount>=coins[ind]){
+            res=min(1+findSol(coins,ind,amount-coins[ind],dp),findSol(coins,ind+1,amount,dp));
+        }
+        else{
+            res=findSol(coins,ind+1,amount,dp);
+        }
+        
+        return dp[ind][amount]=res;
     }
+    
     int coinChange(vector<int>& coins, int amount) {
         int n=coins.size();
-        dp.resize(n+1,vector<int>(amount+1,-1));
-        long res=findSol(coins,n,amount);
+        vector<vector<int>> dp(n+1,vector<int>(amount+1,-1));
+        int res=findSol(coins,0,amount,dp);
         return res==INT_MAX-1?-1:res;
     }
 };
