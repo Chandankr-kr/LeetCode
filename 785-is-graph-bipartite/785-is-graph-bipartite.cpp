@@ -1,9 +1,9 @@
 class Solution {
 public:
-    bool findSol(vector<vector<int>>& graph,int start,vector<bool>& color,vector<bool>& visited){
-    
+    bool findSol(vector<vector<int>> &graph,int start,vector<bool>& visited,vector<bool> &color){
         queue<int> q1;
         q1.push(start);
+        // visited[start]=true;
         while(q1.size()){
             int n=q1.size();
             for(int i=0;i<n;i++){
@@ -26,11 +26,12 @@ public:
     
     bool isBipartite(vector<vector<int>>& graph) {
         int n=graph.size();
-        vector<bool> color(n,false);
         vector<bool> visited(n,false);
+        vector<bool> color(n,false);
+        
         for(int i=0;i<n;i++){
-            if(!visited[i]){
-                if(findSol(graph,i,color,visited))
+            if(visited[i]==false){
+                if(findSol(graph,i,visited,color))
                     return false;
             }
         }
