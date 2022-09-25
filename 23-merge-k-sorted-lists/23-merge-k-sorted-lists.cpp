@@ -19,23 +19,21 @@ class Solution {
 public:
     ListNode* mergeKLists(vector<ListNode*>& lists) {
         priority_queue<ListNode*,vector<ListNode*>,comparator> pq1;
-        int n=lists.size();
-        for(int i=0;i<n;i++){
-            if(lists[i])
-            pq1.push(lists[i]);
+        for(int i=0;i<lists.size();i++){
+            if(lists[i]){
+                pq1.push(lists[i]);
+            }
         }
-        
         ListNode* head=new ListNode(0);
         ListNode* temp=head;
-        
         while(pq1.size()){
-            auto curr=pq1.top();
+            auto it=pq1.top();
             pq1.pop();
-            temp->next=curr;
+            temp->next=it;
             temp=temp->next;
-            if(curr and curr->next){
-                curr=curr->next;
-                pq1.push(curr);
+            if(it and it->next){
+                it=it->next;
+                pq1.push(it);
             }
         }
         return head->next;
