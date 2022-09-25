@@ -10,37 +10,34 @@
  */
 class Solution {
 public:
-    ListNode* findSol(ListNode* head,int &cnt,int &k){
-        ListNode* curr=head,*prev=NULL,*nxt=NULL;
-        int t=0;
-        
+    ListNode* findSol(ListNode* head,int k,int &cnt){
         if(cnt<k)
             return head;
-        
-        while(curr!=NULL and t<k){
-            t++;
+        ListNode* prev=NULL,*curr=head,*nxt=NULL;
+        int count=0;
+        while(count<k){
             nxt=curr->next;
             curr->next=prev;
             prev=curr;
             curr=nxt;
+            count++;
         }
         
-        cnt=cnt-k;
-        if(t==k){
-            head->next=findSol(nxt,cnt,k);
+        cnt-=k;
+        if(count==k){
+            head->next=findSol(curr,k,cnt);
         }
-        
         return prev;
     }
     
     ListNode* reverseKGroup(ListNode* head, int k) {
         int cnt=0;
         ListNode* temp=head;
-        while(temp!=NULL){
+        while(temp){
             cnt++;
             temp=temp->next;
         }
         
-        return findSol(head,cnt,k);
+        return findSol(head,k,cnt);
     }
 };
