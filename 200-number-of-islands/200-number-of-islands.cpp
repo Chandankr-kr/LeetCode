@@ -1,13 +1,21 @@
 class Solution {
 public:
-    void findSol(vector<vector<char>> &grid,int i,int j,int m,int n){
-        if(i<0 or j<0 or i>=m or j>=n or grid[i][j]=='*' or grid[i][j]=='0')
-            return ;
-        grid[i][j]='*';
-        findSol(grid,i-1,j,m,n);
-        findSol(grid,i+1,j,m,n);
-        findSol(grid,i,j-1,m,n);
-        findSol(grid,i,j+1,m,n);
+    void findSol(vector<vector<char>>& grid,int x,int y,int m,int n){
+        if(x<0 or y<0 or x>=m or y>=n)
+            return;
+        grid[x][y]='0';
+        
+        if(x-1>=0 and grid[x-1][y]=='1')
+            findSol(grid,x-1,y,m,n);
+        
+        if(y-1>=0 and grid[x][y-1]=='1')
+            findSol(grid,x,y-1,m,n);
+        
+        if(x+1<m and grid[x+1][y]=='1')
+            findSol(grid,x+1,y,m,n);
+        
+        if(y+1<n and grid[x][y+1]=='1')
+            findSol(grid,x,y+1,m,n);
     }
     
     int numIslands(vector<vector<char>>& grid) {
