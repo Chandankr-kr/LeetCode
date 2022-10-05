@@ -17,11 +17,9 @@ public:
             res->left=root;
             return res;
         }
-        
         int cnt=0;
         queue<TreeNode*> q1;
         q1.push(root);
-        
         while(q1.size()){
             int n=q1.size();
             cnt++;
@@ -37,16 +35,12 @@ public:
                 }
                 else{
                     TreeNode* temp=new TreeNode(val);
-                    
-                        temp->left=it->left;
-                        it->left=temp;
-                    
+                    temp->left=it->left;
+                    it->left=temp;
                     
                     TreeNode* temp1=new TreeNode(val);
-                
-                        temp1->right=it->right;
-                        it->right=temp1;
-                    
+                    temp1->right=it->right;
+                    it->right=temp1;
                 }
             }
         }
