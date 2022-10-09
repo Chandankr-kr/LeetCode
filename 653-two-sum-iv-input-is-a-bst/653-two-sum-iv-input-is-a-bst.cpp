@@ -13,24 +13,23 @@ class Solution {
 public:
     vector<int> res;
     void findSol(TreeNode* root){
-        if(!root)
+        if(root==NULL)
             return;
-        res.push_back(root->val);
         findSol(root->left);
+        res.push_back(root->val);
         findSol(root->right);
     }
+    
     bool findTarget(TreeNode* root, int k) {
         findSol(root);
-        int i=0,j=res.size()-1,sum=0;
-        sort(res.begin(),res.end());
+        int i=0,j=res.size()-1;
         while(i<j){
-            sum=res[i]+res[j];
-            if(sum==k)
+            if(res[i]+res[j]==k)
                 return true;
-            if(sum>k)
-                j--;
-            else
+            else if(res[i]+res[j]<k)
                 i++;
+            else
+                j--;
         }
         return false;
     }
