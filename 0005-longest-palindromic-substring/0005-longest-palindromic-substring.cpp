@@ -1,23 +1,24 @@
 class Solution {
 public:
-    void findSol(string &str,string &res,int left,int right){
-        if(left<0 or right>=str.size() or str[left]!=str[right])
+    void findSol(string &str,int l,int r,string &res){
+        if(l<0 or r>=str.size() or str[l]!=str[r])
             return;
-        int k=right-left+1;
-        if(res.size()<=k)
-            res=str.substr(left,k);
-        findSol(str,res,left-1,right+1);
+        int len=r-l+1;
+        if(len>=res.size())
+            res=str.substr(l,len);
+        findSol(str,l-1,r+1,res);
     }
     
     string longestPalindrome(string s) {
+        string res="";
+        res+=s[0];
         int n=s.size();
         if(n<=1)
             return s;
-        string res="";
-        res+=s[0];
+        
         for(int i=1;i<n;i++){
-            findSol(s,res,i-1,i);
-            findSol(s,res,i-1,i+1);
+            findSol(s,i-1,i,res);
+            findSol(s,i-1,i+1,res);
         }
         return res;
     }
