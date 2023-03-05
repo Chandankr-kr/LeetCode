@@ -11,7 +11,8 @@ public:
         q1.push(0);
         visited[0]=true;
         while(q1.size()){
-            for(int i=q1.size()-1;i>=0;i--){
+            int t=q1.size();
+            for(int i=0;i<t;i++){
                 int j=q1.front();
                 q1.pop();
                 if(j==n-1)
